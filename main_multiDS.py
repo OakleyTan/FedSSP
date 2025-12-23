@@ -58,7 +58,7 @@ if __name__ == '__main__':
     parser.add_argument('--repeat', help='index of repeating;',
                         type=int, default=None)
     parser.add_argument('--data_group', help='specify the group of datasets',
-                        type=str, default='chemcv', choices=['chem', "biochem", 'biochemsn', "biosncv", "chemsn", "chemsncv", "chemcv"])
+                        type=str, default='chem', choices=['chem', "biochem", 'biochemsn', "biosncv", "chemsn", "chemsncv", "chemcv"])
     parser.add_argument('--seq_length', help='the length of the gradient norm sequence',
                         type=int, default=5)
     parser.add_argument('--n_rw', type=int, default=16,
@@ -71,6 +71,7 @@ if __name__ == '__main__':
                         type=str, default='rw_dg', choices=['rw', 'dg', 'rw_dg', 'ones'])
     parser.add_argument('-mo', "--momentum", type=float, default=0.5)
     parser.add_argument('-tau', "--tau_weight", type=float, default=100.0)
+    parser.add_argument('-head', "--head", type=float, default=4)
     try:
         args = parser.parse_args()
     except IOError as msg:

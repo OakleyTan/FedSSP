@@ -323,9 +323,8 @@ def eval_gc_test_SSP(model, device, client):
         x = g.ndata['feat']
         e, u, g, length, label = e.to(device), u.to(device), g.to(device), length.to(device), label.to(device)
         with torch.no_grad():
-            pred, rep, rep_base = client.model(e, u, g, length, x, is_rep=True, context=client.context)
-            pred_pgpa = client.model.head(rep + client.local_consensus)
-            acc_sum += pred_pgpa.max(dim=1)[1].eq(label).sum().item()
+            _, pred = client.model(e, u, g, length, x)
+            acc_sum += pred.max(dim=1)[1].eq(label).sum().item()
             loss = model.loss(pred, label)
         total_loss += loss.item() * num_graphs
         ngraphs += num_graphs
